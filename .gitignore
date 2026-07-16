@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Local runtime artifacts (should never be committed)
+*.log
+codex-proxy.log
+
+# Never commit any credentials or a populated config
+auth.json
+config.toml
+!lib/config.toml.template
