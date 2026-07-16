@@ -11,7 +11,7 @@ session and translates between grok's request format and OpenAI's ChatGPT backen
 
 ```
 $ grodex
-  … grok's TUI, but every token comes from gpt-5.6-sol on your ChatGPT sub …
+  … grok's TUI, but every token comes from GPT-5.6 (Sol/Terra/Luna) on your ChatGPT sub …
 $ grok
   … still the normal xAI grok, unchanged …
 ```
@@ -63,9 +63,10 @@ PY
 If `has account_id` is `False`, you're not on a subscription session — run
 `codex login` and pick the ChatGPT option.
 
-### 5. An active subscription that actually includes **`gpt-5.6-sol`**
-A ChatGPT Plus/Pro/Team (or equivalent) plan with Codex access. If your plan
-can't use `gpt-5.6-sol` in Codex itself, grodex can't either — requests will 4xx.
+### 5. An active subscription that includes the **GPT-5.6** models
+A ChatGPT Plus/Pro/Team (or equivalent) plan with Codex access to
+`gpt-5.6-sol` / `gpt-5.6-terra` / `gpt-5.6-luna`. If your plan can't use a given
+model in Codex itself, grodex can't either — requests will 4xx.
 
 ### 6. A free TCP port (default **8765**) and network access
 The shim listens on `127.0.0.1:8765` and talks to `chatgpt.com` and
@@ -127,7 +128,7 @@ grodex -p "Reply with exactly: OK"
 tail -1 ~/.grodex/codex-proxy.log
 # → [codex-proxy] POST /responses -> 200 ... injected_output=True
 ```
-The status bar in the TUI shows `GPT-5.6-sol (ChatGPT ...)`. (It will still
+The status bar in the TUI shows the selected model, e.g. `GPT-5.6 Sol (ChatGPT ...)`. (It will still
 *say* "I'm Grok" if asked — that's grok's system prompt talking, not the model.
 Routing is the real proof: every request goes through the shim to OpenAI.)
 
@@ -169,7 +170,7 @@ lazy-started shim.
 | `Not signed in` | Re-run `./install.sh` (it does the one-time `grok login`), or `GROK_HOME=~/.grodex grok login`. |
 | `401 ... Could not parse your authentication token` | Your Codex session expired: `codex login`, then retry. |
 | Answers repeat / never finishes | The shim isn't running or is an old version. `pkill -f codex-proxy.py` and run `grodex` again. |
-| `4xx` about the model | Your plan may not have `gpt-5.6-sol` in Codex. |
+| `4xx` about the model | Your plan may not have that GPT-5.6 model (Sol/Terra/Luna) in Codex. |
 | `grodex: command not found` | `~/.local/bin` isn't on PATH (see requirement 7). |
 
 ## Caveats — read these
