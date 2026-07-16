@@ -1,8 +1,9 @@
 # grodex
 
-Run OpenAI's **`gpt-5.6-sol`** inside xAI's **grok** terminal agent, billed to your
-**ChatGPT / Codex subscription** — as a separate `grodex` command that leaves your
-normal `grok` untouched.
+Run OpenAI's **GPT-5.6** models — **Sol**, **Terra**, and **Luna** — inside xAI's
+**grok** terminal agent, billed to your **ChatGPT / Codex subscription**, as a
+separate `grodex` command that leaves your normal `grok` untouched. Switch model
+and reasoning effort (low / medium / high / xhigh) right in the TUI.
 
 No fork, no rebuild. `grodex` is your *official* `grok` binary pointed at an
 isolated config home, plus a tiny local bridge that reuses your `codex login`
@@ -104,12 +105,20 @@ one-time `grok login` (through the bridge) to establish the session. Your normal
 ## Usage
 
 ```sh
-grodex                       # interactive TUI
-grodex -p "explain this bug" # headless / scripting
+grodex                              # interactive TUI
+grodex -p "explain this bug"        # headless / scripting
+grodex -p "..." -m gpt-5.6-terra    # pick a model for one run
 ```
 
+**Switching model & effort:**
+- **Model** — `Ctrl+M` (or `/model gpt-5.6-terra`) to switch between Sol, Terra,
+  and Luna.
+- **Reasoning effort** — use grok's reasoning-effort control to switch between
+  `low`, `medium`, `high`, and `xhigh` per session (default: `high`). `minimal`
+  is intentionally omitted — the ChatGPT backend rejects it for these models.
+
 Everything else is just grok — same keys, slash commands, config. Edit
-`~/.grodex/config.toml` to change the model, reasoning effort, or port.
+`~/.grodex/config.toml` to change the default model, efforts, or port.
 
 ## Verify it's working
 
