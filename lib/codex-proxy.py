@@ -58,6 +58,11 @@ def transform_request(raw: bytes) -> bytes:
                 item["role"] = "developer"
     d["store"] = False
     d["stream"] = True
+    # GPT-5.6 reasoning models on the ChatGPT backend reject sampling params
+    # (400 "Unsupported parameter: temperature" / "top_p"). Grok's compaction
+    # path sets them, which breaks /compact; normal turns don't send them.
+    d.pop("temperature", None)
+    d.pop("top_p", None)
     return json.dumps(d).encode()
 
 
